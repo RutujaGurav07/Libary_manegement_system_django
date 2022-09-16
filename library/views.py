@@ -1,4 +1,5 @@
 from sqlite3 import Cursor
+from tabnanny import check
 from urllib import request
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
@@ -147,15 +148,30 @@ def admin_register(request):
         #         email=value
         #     if key == "password1":
         #         pwd=value
+        
+        # c="select 1 from users where email = '{}' ".format(email)
+        # cursor.execute(c)
+        # m.commit()
+        # t=cursor.fetchall()
+        # print(t)
 
         if  len(name)<3:
             messages.error(request,"Username must be greater than 3")
         if password1 != password2:
             messages.error(request,"Password do not match")
+        # if t!=():
+        #     messages.error(request,"Email is already Exist ")
+
+        
         else:
 
             c= "insert into users Values ('{}','{}','{}','{}')".format(name,email,password2,type)
-            cursor.execute(c)
+            try:
+                cursor.execute(c)
+            except :
+                messages.error(request,"Email is already Exist ")
+
+
             m.commit()
 
 
