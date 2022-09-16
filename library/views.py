@@ -95,8 +95,7 @@ def admin(request):
             if (t[-1] == 'Admin'):
                 return render(request,'Admin_portal.html')
             else:
-                return render(request,'Student_portal.html')
-
+                return student(request)
 
     # global email,pwd
     # if request.method == 'POST':
