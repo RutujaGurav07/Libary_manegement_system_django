@@ -42,6 +42,9 @@ def add_book(request):
         c="insert into book_detail( name ,ISBN,author,publication) Values ('{}','{}','{}','{}')".format(book_name,ISBN,author,publication)
         cursor.execute(c)
         m.commit()
+        return all_book(request)
+
+
         
     return render(request,'add_book.html')
 
@@ -70,6 +73,8 @@ def delete_book(request):
 
         t = (cursor.fetchone())
         print(t)
+        return all_book(request)
+
         
 
 
@@ -90,6 +95,8 @@ def update_book(request):
 
         t = (cursor.fetchone())
         print(t)
+        return all_book(request)
+
     return render(request,'update_book.html')
 
 
