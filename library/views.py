@@ -154,13 +154,21 @@ def admin_register(request):
         # m.commit()
         # t=cursor.fetchall()
         # print(t)
+        SpecialSym =['$', '@', '#', '%']
 
         if  len(name)<3:
             messages.error(request,"Username must be greater than 3")
         if password1 != password2:
             messages.error(request,"Password do not match")
-        # if t!=():
-        #     messages.error(request,"Email is already Exist ")
+        if len(password1) < 6:
+            messages.error(request,'length should be at least 6')
+        if not any(char.isupper() for char in password1) :
+            messages.error(request,'Password should have at least one uppercase letter')
+        if not any(char.islower() for char in password1) :
+            messages.error(request,'Password should have at least one lowercase letter')
+        if not any(char in SpecialSym for char in password1):
+            messages.error(request,'Password should have at least one of the symbols $@#')
+
 
         
         else:
