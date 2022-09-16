@@ -6,6 +6,14 @@
             {% csrf_token %}
             <h3 align="center" >Sign Up</h3>
             <div class="form-group">
+                <label for="exampleFormControlSelect1">Admin OR Student</label>
+                <select class="form-control" id="type" name="type">
+                  <option>Admin</option>
+                  <option>Student</option>
+                </select>
+               
+              </div>
+            <div class="form-group">
                 <label for="fullName" >Full Name</label>
                 <input type="text" class="form-control" id="fullName" name="fullName" placeholder="Enter Full Name">
             </div>

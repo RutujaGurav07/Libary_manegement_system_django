@@ -3,13 +3,16 @@
 <html>
     <body>
         <form method="POST" style="width: 50vw;height: 60vh;margin: 5vh auto;">
-            <h3 align="center" style="color: rgb(24, 26, 26);">Login</h3>
+            {% csrf_token %}
+
+
+            <h3 align="center" >Login</h3>
             <div class="form-group">
-                <label for="email" style="color: rgb(31, 29, 26);">Email Address</label>
+                <label for="email" >Email Address</label>
                 <input type="email" class="form-control" id="email" name="email" placeholder="Enter email">
             </div>
             <div class="form-group">
-                <label for="password" style="color: rgb(15, 15, 14);">Password</label>
+                <label for="password" >Password</label>
                 <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
             </div>
             <a href="/admin_register">Create New Admin</a>
