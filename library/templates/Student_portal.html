@@ -3,6 +3,14 @@
 {% block content %}
 <html>
     <body>
+        {% for message in messages %}
+    
+        <div class="alert alert-primary" role="alert">
+            <a class="close" href="#" data-dismiss="alert">×</a>
+               {{ message }}
+        </div>
+    
+    {% endfor %}
         <h1>
             Hello student 
         </h1>

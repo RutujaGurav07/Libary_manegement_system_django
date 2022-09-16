@@ -95,8 +95,13 @@ def admin(request):
         try:
             if t!=():
                 if (t[-1] == 'Admin'):
+                    messages.info(request, f"You are now logged in  Admin portal.")
+
                     return render(request,'Admin_portal.html')
+
                 else:
+                    messages.info(request, f"You are now logged in  Student portal.")
+
                     return student(request)
         except:
             messages.error(request,'Invalid Username and Password')
