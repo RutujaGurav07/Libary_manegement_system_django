@@ -20,6 +20,64 @@ type=''
 def say_hello(request):
     return render(request,'welcome.html')
 
+def add_book(request):
+    if request.method == 'POST':
+        m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
+        cursor=m.cursor()
+        book_name=request.POST['book_name']
+        ISBN=request.POST['ISBN']
+        author=request.POST['author']
+        publication=request.POST['publication']
+        c="insert into book_detail( name ,ISBN,author,publication) Values ('{}','{}','{}','{}')".format(book_name,ISBN,author,publication)
+        cursor.execute(c)
+        m.commit()
+        
+    return render(request,'add_book.html')
+
+def all_book(request):
+    m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
+    cursor=m.cursor()
+    c= "select * from book_detail"
+    cursor.execute(c)
+    t=list(cursor.fetchall())
+    print("all book",t)
+ 
+    return render(request,'all_book.html', { 'data': t})
+
+def delete_book(request):
+    if request.method == 'POST':
+        m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
+        cursor=m.cursor()
+        book_id= request.POST['book_id']
+        book_name = request.POST['book_name']
+        c= "delete from book_detail where book_id ='{}' and name = '{}' ".format(book_id,book_name)
+        cursor.execute(c)
+        m.commit()
+
+        t = (cursor.fetchone())
+        print(t)
+        
+
+
+    return render(request,'delete_book.html')
+
+def update_book(request):
+    if request.method == 'POST':
+        m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
+        cursor=m.cursor()
+        book_id= request.POST['book_id']
+        book_name = request.POST['book_name']
+        ISBN = request.POST['ISBN']
+        author = request.POST['author']
+        publication = request.POST['publication']
+        c= "update book_detail set name ='{}' , ISBN = '{}',author='{}',publication='{}' where book_id ='{}'  ".format(book_name,ISBN,author,publication,book_id )
+        cursor.execute(c)
+        m.commit()
+
+        t = (cursor.fetchone())
+        print(t)
+    return render(request,'update_book.html')
+
 
 def admin(request):
     if request.method == 'POST':
@@ -29,11 +87,16 @@ def admin(request):
         password = request.POST['password']
         c= "select * from users where email ='{}' and password = '{}' ".format(Email,password)
         cursor.execute(c)
-        t = tuple(cursor.fetchall())
+        t = (cursor.fetchone())
+        print(t)
         
         print("DONE")
         if t!=():
-            return render(request,'success.html')
+            if (t[-1] == 'Admin'):
+                return render(request,'Admin_portal.html')
+            else:
+                return render(request,'Student_portal.html')
+
 
     # global email,pwd
     # if request.method == 'POST':
@@ -56,11 +119,14 @@ def admin(request):
 
 
 def student(request):
-
-
-
-
-    return render(request,'Student.html')
+    m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
+    cursor=m.cursor()
+    c= "select * from book_detail"
+    cursor.execute(c)
+    t=list(cursor.fetchall())
+    print("all book",t)
+ 
+    return render(request,'Student_portal.html', { 'data': t})
 
 def admin_register(request):
     global name,email,pwd

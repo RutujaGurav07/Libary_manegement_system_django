@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block content %}
+<html>
+    <body>
+        <form method="POST" style="width: 50vw;height: 60vh;margin: 5vh auto;">
+            {% csrf_token %}
+            <h3 align="center" >Update book </h3>
+            <div class="form-group">
+                <label for="book_id" >Book ID</label>
+                <input type="number" class="form-control" id="book_id" name="book_id" placeholder="Book ID">
+            </div>
+
+            <div class="form-group">
+                <label for="book_name" > Update Book Name</label>
+                <input type="text" class="form-control" id="book_name" name="book_name" placeholder="Enter book_name">
+            </div>
+            <div class="form-group">
+                <label for="ISBN" >Update ISBN</label>
+                <input type="number" class="form-control" id="ISBN" name="ISBN" placeholder="Enter ISBN Number ">
+            </div>
+          
+            <div class="form-group">
+                <label for="author">UPdate Author</label>
+                <input type="text" class="form-control" id="author" name="author" placeholder="Enter Author Name">
+            </div>
+            <div class="form-group">
+                <label for="publication"> Update Publication Name</label>
+                <input type="publication" class="form-control" id="publication" name="publication" placeholder="Enter Publication Name">
+            </div>
+            <br />
+            <button type="submit" class="btn btn-primary">Submit</button>
+        
+        </form>
+        
+        
+    </body>
+</html>
+{% endblock %}
