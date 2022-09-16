@@ -1,10 +1,49 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 <html>
-    <body>
-        <h1>
-           Welcome page 
-        </h1>
-    </body>
+
+<head>
+
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+        crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="../static/css/navstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="../static/css/welcome.css'"/> -->
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}" />
+
+</head>
+
+<body>
+    <div class="infocontainer">
+        <h1>Library Management System </h1>
+    </div>
+    <div class="row portal_option">
+        <div class="Box1">
+            <h3>Student</h3>
+            <div class="innerbox">
+
+                <div class ="box_container" ><a href="/admin_login" class="btn btn-info " role="button" aria-pressed="true">Login</a></div>
+                <div class="box_container"><a href="/admin_register" class="btn btn-info " role="button" aria-pressed="true">Register</a></div>
+            </div>
+
+        </div>
+        <div class="Box1">
+            <h3>Admin</h3>
+            <div class="innerbox">
+
+                <div class ="box_container" ><a href="/admin_login" class="btn btn-info " role="button" aria-pressed="true">Login</a></div>
+                <div class="box_container"><a href="/admin_register" class="btn btn-info " role="button" aria-pressed="true">Register</a></div>
+            </div>
+
+        </div>    </div>
+</body>
+
 </html>
 {% endblock %}

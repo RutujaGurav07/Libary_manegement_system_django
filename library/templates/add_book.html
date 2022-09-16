@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
 <html>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}" />
+
+    </head>
     <body>
         <form method="POST" style="width: 50vw;height: 60vh;margin: 5vh auto;">
             {% csrf_token %}

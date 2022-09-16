@@ -1,0 +1,38 @@
+.box1{
+    width: 18rem;
+    height:10rem;
+    text-align: center;
+    margin: auto;
+    top :50%;
+    background-color: antiquewhite;
+    padding: 1rem;
+    
+}
+body{
+    background-image: url(bg.jpg);
+    background-repeat: no-repeat, repeat;
+    background-position: center;
+    background-size: cover;
+    backdrop-filter: blur(4px);
+} 
+.infocontainer{
+    height: 30%;
+    padding: 2rem;
+}
+.portal_option{
+    margin: 3rem;
+}
+.innerbox{
+    display: inline-flex;
+    margin: 1rem;
+    top :10%;
+
+}
+.box_container{
+    margin: 0.2rem;
+}
+
+h1{
+    text-align: center;
+    color: white;
+}
