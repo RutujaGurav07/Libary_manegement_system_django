@@ -92,28 +92,16 @@ def admin(request):
         print(t)
         
         print("DONE")
-        if t!=():
-            if (t[-1] == 'Admin'):
-                return render(request,'Admin_portal.html')
-            else:
-                return student(request)
+        try:
+            if t!=():
+                if (t[-1] == 'Admin'):
+                    return render(request,'Admin_portal.html')
+                else:
+                    return student(request)
+        except:
+            messages.error(request,'Invalid Username and Password')
 
-    # global email,pwd
-    # if request.method == 'POST':
-    #     m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
-    #     cursor=m.cursor()
-    #     d=request.POST
-    #     for key,value in d.items():
-    #         if key == "email":
-    #             email=value
-    #         if key == "password1":
-    #             pwd=value
 
-    #         i= "select * from users where email='{}' and password='{}'".format(email,pwd)
-    #         cursor.execute(i)
-    #         t = tuple(cursor.fetchall())
-           
-     
 
     return render(request,'admin_login.html')
 
@@ -138,22 +126,7 @@ def admin_register(request):
         email= request.POST['email']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-        # S=request.POST
-        # for key,value in S.items():
-        #     if key == "type":
-        #         type=value
-        #     if key == "fullName":
-        #         name=value
-        #     if key == "email":
-        #         email=value
-        #     if key == "password1":
-        #         pwd=value
-        
-        # c="select 1 from users where email = '{}' ".format(email)
-        # cursor.execute(c)
-        # m.commit()
-        # t=cursor.fetchall()
-        # print(t)
+      
         SpecialSym =['$', '@', '#', '%']
 
         if  len(name)<3:
