@@ -8,6 +8,7 @@ from django.contrib.auth.models import User,auth
 from django.contrib import messages
 
 import mysql.connector as sql
+import json
 
 name=''
 email=''
@@ -16,6 +17,15 @@ type=''
 
 
 
+class create_dict(dict): 
+  
+    # __init__ function 
+    def __init__(self): 
+        self = dict() 
+          
+    # Function to add key:value 
+    def add(self, key, value): 
+        self[key] = value
 # Create your views here.
 
 def say_hello(request):
@@ -36,14 +46,17 @@ def add_book(request):
     return render(request,'add_book.html')
 
 def all_book(request):
+    mydict = create_dict()
+
     m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
     cursor=m.cursor()
     c= "select * from book_detail"
     cursor.execute(c)
-    t=list(cursor.fetchall())
+    t=cursor.fetchall()
     print("all book",t)
+  
  
-    return render(request,'all_book.html', { 'data': t})
+    return render(request,'all_book.html', {'data':t})
 
 def delete_book(request):
     if request.method == 'POST':
