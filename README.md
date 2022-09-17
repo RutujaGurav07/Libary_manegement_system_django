@@ -44,10 +44,15 @@ Now let's migrate our django project:
 ```bash
 python manage.py migrate
 ```  
-If there are no hitches here you should now be able to open your server by running:
+If there are no hitches here you should now be able to open your server by running
 
 ```bash
 python manage.py runserver
+```  
+project running on localhost
+
+```bash
+http://127.0.0.1:8000/welcome/
 ```  
 ### Screenshots
 
