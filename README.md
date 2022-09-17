@@ -49,6 +49,8 @@ If there are no hitches here you should now be able to open your server by runni
 ```bash
 python manage.py runserver
 ```  
+### Screenshots
+
 
           
     
