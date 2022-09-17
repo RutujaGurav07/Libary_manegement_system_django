@@ -19,11 +19,19 @@
               </button>
               <div class="collapse navbar-collapse text-right" id="navbarNav">
                 <ul class="navbar-nav">
-                  
+                  {% if flag %}
+
                   <li class="nav-item">
-                    <a class="nav-link" href="/admin_login">Login</a>
+                    <a class="nav-link" href="/welcome">Logout {{flag}}</a>
                   </li>
-                  
+
+                  {% else %}
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/login">Login {{flag}}</a>
+                  </li>
+                  {% endif %}
+
                 </ul>
               </div>
             </div>

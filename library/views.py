@@ -1,4 +1,5 @@
 from sqlite3 import Cursor
+from sys import flags
 from tabnanny import check
 from urllib import request
 from django.shortcuts import render,redirect
@@ -9,30 +10,24 @@ from django.contrib import messages
 
 import mysql.connector as sql
 import json
+flag =0
 
-name=''
-email=''
-pwd=''
-type=''
+def is_logged(request):
+    flag =1
 
-
-
-class create_dict(dict): 
-  
-    # __init__ function 
-    def __init__(self): 
-        self = dict() 
-          
-    # Function to add key:value 
-    def add(self, key, value): 
-        self[key] = value
-# Create your views here.
+    return render(request,'base.html',{ 'flag': flag})
 
 def say_hello(request):
     return render(request,'welcome.html')
 
+#  Admin portal
+
 def admin_portal(request):
     return render(request,'Admin_portal.html')
+
+
+#  Create new book entry by Admin 
+
 def add_book(request):
     if request.method == 'POST':
         m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
@@ -50,8 +45,10 @@ def add_book(request):
         
     return render(request,'add_book.html')
 
+
+#  Displaying all book to Admin 
+
 def all_book(request):
-    mydict = create_dict()
 
     m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
     cursor=m.cursor()
@@ -59,9 +56,11 @@ def all_book(request):
     cursor.execute(c)
     t=cursor.fetchall()
     print("all book",t)
-  
  
     return render(request,'all_book.html', {'data':t})
+
+
+#  Delete book entry by Admin 
 
 def delete_book(request):
     if request.method == 'POST':
@@ -77,10 +76,10 @@ def delete_book(request):
         print(t)
         return all_book(request)
 
-        
-
-
     return render(request,'delete_book.html')
+
+
+#  Update book entry by Admin 
 
 def update_book(request):
     if request.method == 'POST':
@@ -102,7 +101,10 @@ def update_book(request):
     return render(request,'update_book.html')
 
 
-def admin(request):
+
+#  Login
+
+def login(request):
     if request.method == 'POST':
         m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
         cursor=m.cursor()
@@ -116,11 +118,13 @@ def admin(request):
         print("DONE")
         try:
             if t!=():
+                # if user is admin log in admin portal
+                is_logged(request)
                 if (t[-1] == 'Admin'):
                     messages.info(request, f"You are now logged in  Admin portal.")
 
                     return render(request,'Admin_portal.html')
-
+                # user is student log in student portal 
                 else:
                     messages.info(request, f"You are now logged in  Student portal.")
 
@@ -130,9 +134,9 @@ def admin(request):
 
 
 
-    return render(request,'admin_login.html')
+    return render(request,'login.html')
 
-
+# Display book list to student
 def student(request):
     m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
     cursor=m.cursor()
@@ -143,6 +147,8 @@ def student(request):
  
     return render(request,'Student_portal.html', { 'data': t})
 
+
+# User registration 
 def admin_register(request):
     global name,email,pwd
     if request.method == 'POST':
@@ -153,7 +159,9 @@ def admin_register(request):
         email= request.POST['email']
         password1 = request.POST['password1']
         password2 = request.POST['password2']
-      
+    
+    # form validation  
+
         SpecialSym =['$', '@', '#', '%']
 
         if  len(name)<3:
@@ -170,17 +178,22 @@ def admin_register(request):
             messages.error(request,'Password should have at least one of the symbols $@#')
 
 
-        
+        # Showing  error msg for duplicate email 
         else:
 
+
             c= "insert into users Values ('{}','{}','{}','{}')".format(name,email,password2,type)
+            
             try:
                 cursor.execute(c)
+                # return render(request,'login.html')
             except :
                 messages.error(request,"Email is already Exist ")
 
 
             m.commit()
 
+
+        # return render(request,'login.html')
 
     return render(request,'admin_register.html')
