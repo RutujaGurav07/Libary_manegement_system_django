@@ -1,7 +1,8 @@
 body{
-    background-image: url(bg2.jpg);
-    background-repeat: no-repeat;
-    /* background-position: center; */
-    background-size: cover;
+    background-image: url(bg2.jpg)  no-repeat center center fixed; 
     backdrop-filter: blur(3px);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 } 
