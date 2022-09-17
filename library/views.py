@@ -31,6 +31,8 @@ class create_dict(dict):
 def say_hello(request):
     return render(request,'welcome.html')
 
+def admin_portal(request):
+    return render(request,'Admin_portal.html')
 def add_book(request):
     if request.method == 'POST':
         m=sql.connect(host="localhost",user="root",passwd="new_password",database ="library_management")
